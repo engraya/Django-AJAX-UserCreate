@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+<div class="container m-5 p-5 text-align center flex">
+   
+<form id="userForm">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="title" class="form-label">User Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter User Title">
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-label">User Email:</label>
+      <input id="email" class="form-control"  placeholder="Enter User Email" ></input>
+    </div>
+    <div class="form-group">
+        <label for="bio" class="form-label">User Bio:</label>
+        <textarea  id="bio" cols="30" rows="10" class="form-control"  placeholder="Enter User Bio" ></textarea>
+      </div>
+    <div class="form-group">
+      <label class="form-check-label">User Image:</label>
+      <input class="form-control-file" type="file" id="image">
+    </div>
+    <input id="submit" type="submit" class="btn btn-primary" value="submit"></input>
+  </form>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+
+    $(document).on('submit','#userForm', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type:'POST',
+            url:'{% url "newUser" %}',
+            data:{
+                name:$('#name').val(),
+                email:$('#email').val(),
+                bio:$('#bio').val(),
+                image:$('#image')[0].files[0],
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function() {
+                alert("New User Created Successfully!!!!")
+            },
+        });
+    });
+
+
+</script>
+
+
+{% endblock content %}
+    

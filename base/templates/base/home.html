@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-2">
+    {% for user in users %}
+    <div class="col mb-4">
+        <div class="card">
+            <div class="view overlay">
+                <img class="card-img-top" src="{{user.image.url}}" alt="" style="height: 100px; width: 100px; border-radius:50%">
+                <a href="#">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">{{user.name}}</h4>
+                <h4 class="card-title">{{user.email}}</h4>
+                <h4 class="card-title">{{user.image}}</h4>
+                <p class="card-text">{{user.bio}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}
+
+
+
+    
